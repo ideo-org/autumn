@@ -41,7 +41,7 @@ const paymentVerifier = createMockPaymentVerifier();
 
 // Homepage
 app.get('/', (c) => {
-  return c.html(`
+  return c.html(``
     <!DOCTYPE html>
     <html>
       <head>
