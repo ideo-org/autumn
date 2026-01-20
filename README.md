@@ -1,3 +1,22 @@
+# Autumn-x402 (Cronos Hackathon Fork)
+
+> **🚀 Cronos x402-Native Pricing & Billing Engine for AI Apps and Agents**
+
+This is a fork of [Autumn](https://useautumn.com), re-architected as a **Cronos-first, x402-native pricing and billing engine** for AI applications and autonomous agents. Stripe has been completely removed; all payments are settled via the [x402 Facilitator](https://docs.cronos.org/x402) on Cronos EVM.
+
+## What Changed
+
+- **No Stripe**: All payment settlement goes through x402 on Cronos (testnet/mainnet) using devUSDC.e or other supported tokens
+- **x402-Native APIs**: `attach`, `check`, and `track` now create and verify x402 payment requirements instead of Stripe sessions
+- **Agent-First**: Built for AI agents using Crypto.com AI Agent SDK and MCP servers to autonomously manage billing and payments
+- **Pricing Infra for Cronos**: Reusable engine that any Cronos AI/x402 app can plug into for metered usage, credits, subscriptions, and overages
+
+## Why This Matters
+
+Every AI agent and x402 dApp on Cronos needs sophisticated pricing logic (free tiers, usage tracking, credits, recurring billing). Autumn-x402 provides **Stripe-grade billing ergonomics** with x402 settlement, so builders can ship complex pricing models in hours instead of weeks.
+
+---
+
 # Autumn
 
 ![Autumn](assets/github_hero.png)
