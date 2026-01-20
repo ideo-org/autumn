@@ -113,3 +113,4 @@ server/chrome
 
 
 server/autumn.config.ts
+examples/x402-demo/.env
