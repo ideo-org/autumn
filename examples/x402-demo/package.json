@@ -1,0 +1,19 @@
+{
+  "name": "x402-ai-demo",
+  "version": "1.0.0",
+  "description": "Pay-per-use AI with Cronos x402",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node app.js",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "hono": "^4.0.0",
+    "@hono/node-server": "^1.8.0"
+  },
+  "keywords": ["x402", "cronos", "ai", "micropayments"],
+  "author": "",
+  "license": "MIT"
+}
