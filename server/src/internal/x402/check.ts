@@ -161,7 +161,8 @@ async function mockGetUsage(
   // In production: SELECT SUM(value) FROM usage_events WHERE customerId = ... AND featureId = ...
   const now = new Date();
   const periodStart = new Date(now.getFullYear(), now.getMonth(), 1);
-  const periodEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  const periodEnd = new Date(now.getFullYear(), now.getMonth() + 1code server/src/internal/x402/track.ts
+  , 0);
 
   return {
     customerId,
