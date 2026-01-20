@@ -5,11 +5,11 @@
 
 import { Hono } from 'hono';
 import { Anthropic } from '@anthropic-ai/sdk';
-import { createX402Client } from '../../server/src/x402/client';
+import { createX402Client } from '../../../server/src/x402/client';
 import {
   createUsageTracker,
   createPaymentVerifier,
-} from '../../server/src/internal/x402';
+} from '../../../server/src/internal/x402';
 
 // Initialize app
 const app = new Hono();
