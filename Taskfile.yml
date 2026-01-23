@@ -19,6 +19,7 @@ tasks:
 
   db:migrate:
     desc: Run Drizzle migrations
+    deps: [db:generate]
     cmds:
       - bun db:migrate
 
@@ -30,12 +31,18 @@ tasks:
   redis:docker:
     desc: Start a persistent Redis container (Valkey)
     cmds:
+      - docker rm -f autumn-redis || true
       - docker run -d --name autumn-redis -p 6379:6379 -v autumn-redis-data:/data valkey/valkey:8.0
 
-  postgres:
+  db:
     desc: Start a persistent local Postgres container
     cmds:
-      - docker run -d --name autumn-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v autumn-postgres-data:/var/lib/postgresql/data postgres:16
+      - docker rm -f autumn-postgres || true
+      - docker run --name autumn-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v autumn-postgres-data:/var/lib/postgresql/data postgres:16
+    finally:
+      - cmds:
+        - docker stop autumn-postgres
+        - docker rm autumn-postgres
 
   server:
     desc: Start the backend server
