@@ -1,165 +1,109 @@
-# Autumn-x402 (Cronos Hackathon Fork)
+# Autumn x402
 
-> **🚀 Cronos x402-Native Pricing & Billing Engine for AI Apps and Agents**
+🚀 **Blockchain micropayments for AI inference using Cronos zkEVM's x402 protocol**
 
-This is a fork of [Autumn](https://useautumn.com), re-architected as a **Cronos-first, x402-native pricing and billing engine** for AI applications and autonomous agents. Stripe has been completely removed; all payments are settled via the [x402 Facilitator](https://docs.cronos.org/x402) on Cronos EVM.
+## Overview
 
-## What Changed
+Autumn x402 integrates Cronos zkEVM's x402 micropayment protocol with AI inference APIs, enabling seamless blockchain payments for AI model usage. This hackathon project demonstrates how x402 can revolutionize AI API monetization with instant, low-cost transactions.
 
-- **No Stripe**: All payment settlement goes through x402 on Cronos (testnet/mainnet) using devUSDC.e or other supported tokens
-- **x402-Native APIs**: `attach`, `check`, and `track` now create and verify x402 payment requirements instead of Stripe sessions
-- **Agent-First**: Built for AI agents using Crypto.com AI Agent SDK and MCP servers to autonomously manage billing and payments
-- **Pricing Infra for Cronos**: Reusable engine that any Cronos AI/x402 app can plug into for metered usage, credits, subscriptions, and overages
+## Key Features
 
-## Why This Matters
+- **Micropayment Integration**: Pay-per-use AI model inference with x402
+- **Developer-Friendly**: Simple API integration for AI developers
+- **Low-Cost Transactions**: Leverage Cronos zkEVM for efficient payments
+- **Real-Time Billing**: Automatic payment tracking and verification
+- **No Stripe Required**: All payments settled via x402 on Cronos
 
-Every AI agent and x402 dApp on Cronos needs sophisticated pricing logic (free tiers, usage tracking, credits, recurring billing). Autumn-x402 provides **Stripe-grade billing ergonomics** with x402 settlement, so builders can ship complex pricing models in hours instead of weeks.
+## Technical Stack
 
----
+- **Frontend**: Next.js + TypeScript
+- **Backend**: Node.js with x402 integration
+- **Blockchain**: Cronos zkEVM testnet
+- **Payment Protocol**: x402 for microtransactions
+- **Database**: Supabase for tracking
 
-# Autumn
+## x402 Implementation
 
-![Autumn](assets/github_hero.png)
+This project implements x402 payment flow:
 
-[![Discord](https://img.shields.io/badge/Join%20Community-5865F2?logo=discord&logoColor=white)](https://discord.gg/53emPtY9tA)
-[![Follow](https://img.shields.io/twitter/follow/autumnpricing?style=social)](https://x.com/autumnpricing)
-[![Y Combinator](https://img.shields.io/badge/Y%20Combinator-F24-orange)](https://www.ycombinator.com/companies/autumn)
-[![Cloud](https://img.shields.io/badge/Cloud-☁️-blue)](https://app.useautumn.com)
-[![Documentation](https://img.shields.io/badge/Documentation-📕-blue)](https://docs.useautumn.com)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/useautumn/autumn)
-
-[Autumn](https://useautumn.com) is an open-source layer between Stripe and your application, allowing you to create any pricing model and embed it with a couple lines of code. On Autumn you can build:
-- Subscriptions
-- Credit systems & top ups
-- Usage-based models & overages
-- Custom plans for large customers
-
-All this without having to handle webhooks, upgrades/downgrades, cancellations or payment fails.
-
+1. **Attach**: Create x402 payment requirements for API calls
+2. **Check**: Verify user payment status
+3. **Track**: Monitor usage and billing
+4. **Verify**: Confirm x402 transactions on Cronos
 
 ## Getting Started
 
-**Cloud**: The quickest way to start using Autumn is through our [cloud service](https://app.useautumn.com). 
+### Prerequisites
 
-**Self Hosted**: If you'd like to self-host Autumn:
+- Node.js 18+
+- Bun runtime
+- Cronos zkEVM wallet with testnet tokens
 
-1. Make sure you have `bun` installed
-2. Install the project dependencies
+### Installation
+
 ```bash
 bun install
 ```
-3. Run our set up script:
+
+### Configuration
+
+Create a `.env` file:
+
+```env
+DATABASE_URL=postgresql://...
+CRONOS_RPC_URL=https://evm-t3.cronos.org
+X402_CONTRACT_ADDRESS=0x...
+```
+
+### Run Development Server
+
 ```bash
-bun setup
+bun dev
 ```
 
-4. Generate the relevant tables in your postgres DB
-```bash
-bun db:generate && bun db:migrate
+Navigate to `http://localhost:3000`
+
+## Use Cases
+
+- **AI API Monetization**: Charge per inference with x402
+- **Agent-to-Agent Payments**: Autonomous AI agents pay each other
+- **Developer Tooling**: Built-in billing for AI platforms
+- **Microtransactions**: Sub-cent payments for AI usage
+
+## Demo
+
+Watch our demo video: [YouTube Link]
+
+Live demo: [https://autumn-x402.vercel.app](https://autumn-x402.vercel.app)
+
+## Architecture
+
+```
+User Request → x402 Check → AI Inference → x402 Verify → Response
 ```
 
-5. Run Autumn:
+All payments are settled on Cronos zkEVM using the x402 protocol, eliminating traditional payment overhead.
 
-For Windows
-```bash
-docker compose -f docker-compose.dev.yml up
-```
+## Hackathon Project
 
-For mac/linux:
- ```bash
-docker compose -f docker-compose.unix.yml up
-```
+This is a fork of [useAutumn](https://useautumn.com), re-architected for the Cronos Hackathon to showcase x402 payments for AI applications. Stripe has been completely removed; all payments flow through x402.
 
-That's it! You should be able to see the Autumn dashboard on `http://localhost:3000`. 
+## Contributing
 
-> ⚠️ To log in, enter an email at the sign in page, and an OTP should appear in your console / terminal. Normally, we use Resend to email an OTP or Google OAuth -- these can be set up by providing your credentials in `server/.env`
+Contributions welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md)
 
-> ℹ️ Our set up script initializes the required env vars and (optionally) a Supabase instance. If you'd like to use your own Postgres instance, you can do so -- just paste the connection string in the `DATABASE_URL` env variable at `server/.env`
+## License
 
-## Troubleshooting
+Apache 2.0 - see [LICENSE](LICENSE)
 
-If you encounter a `SyntaxError: Unexpected end of JSON input` error when running `bun setup` again after previously running it, you may need to clear your database tables first. This is a [known issue](https://github.com/drizzle-team/drizzle-orm/issues/4529) that can occur when running database migrations multiple times.
+## Links
 
-To resolve this:
+- [DoraHacks BUIDL](https://dorahacks.io/buidl/xxxxx)
+- [GitHub Repository](https://github.com/ideo-org/autumn)
+- [Cronos Documentation](https://docs.cronos.org/x402)
+- [x402 Protocol](https://docs.cronos.org/x402)
 
-1. Connect to your database
-2. Drop all existing tables
-3. Run the setup script again:
+## Contact
 
-
-## Why Autumn
-
-**1️⃣ Billing infra gets complex fast**
-
-More than payments: it's building permission management, metering, usage limits with cron jobs, and connecting it to upgrade, downgrade, cancellation and failed payments states. Race conditions, edge cases, and other bugs will slow you down.
-
-**2️⃣ Billing and app logic should be decoupled**
-
-Growing companies iterate on pricing often: raising prices, experimenting with credits or charging for a new feature. DB migrations, rebuilding in-app flows, internal dashboards for custom pricing and grandfathering users on old pricing is a nightmare.
-
-
-## How it works
-First, create your products and plans on the dashboard. We support **any** pricing model. Some popular ones we've seen include:
-
-1. **Usage & Overage** ⚡: set real-time usage limits and choose when they reset. Charge users if they go over.
-2. **Credits** 💰: users can access monetary or arbitrary credits that many features can draw from
-3. **Seat-based with per-seat limits** 👥:: bill customers for their users (or other entities)
-4. **Pay upfront** 💳: let users purchase a fixed quantity of a feature upfront, which is used over time
-
-
-Next, all your billing logic can be implemented through just 3 functions:
-
-1. `/attach`: One function call for all purchase flows. We return a Stripe Checkout URL, or handle an upgrade/downgrade.
-
-```tsx
-const { attach } = useAutumn();
-<button
-  onClick={async () => {
-    await attach({ productId: "pro" });
-  }}
->
-  Upgrade to Pro
-</button>
-```
-
-2. `/check`: Check whether a customer has access to a product, feature or remaining usage.
-```ts
-const { check } = useAutumn();
-
-const { data } = await check({ featureId: "ai_tokens" })
-
-!data.allowed && alert("AI limit reached")
-```
-
-3. `/track`: When a customer uses a usage-based feature, record a usage event.
-
-```ts
-const { track } = useAutumn();
-
-await track({
-  featureId: "ai_tokens",
-  value: 1312
-})
-```
-
-## Others
-
-**Contributing** 🤝: If you're interested in contributing, you can check out our guide [here](/.github/CONTRIBUTING.md). All types of help are appreciated :)
-
-**Support** 💬: If you need any type of support, we're typically most responsive on our [Discord channel](https://discord.gg/STqxY92zuS), but feel free to email us `hey@useautumn.com` too!
-
-
-
-<!-- ## Congratulations!
-
-You've embedded a full billing system into your application within a few minutes. You can make any pricing model changes you need, or handle custom plans without needing to alter your codebase.
-
-Feel free to self-host Autumn, or use our hosted version at https://useautumn.com. And let us know any questions, thoughts or feedback at hey@useautumn.com. -->
-
-## Contributors
-
-Thanks to all our contributors for helping make autumn a better product!
-
-<a href="https://github.com/useautumn/autumn/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=useautumn/autumn" />
-</a>
+Telegram: [@ideoorg](https://t.me/ideoorg)  
+Twitter: [@ideo_org](https://twitter.com/ideo_org)
