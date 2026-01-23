@@ -9,5 +9,6 @@ function collatePgColumn<C extends PgColumn<any>>(col: C, collation: string) {
 }
 
 export const sqlNow = sql`ROUND(date_part('epoch', NOW()) * 1000)::BIGINT`;
+export const sqlTimestampNow = sql`now()`;
 
 export { collatePgColumn };

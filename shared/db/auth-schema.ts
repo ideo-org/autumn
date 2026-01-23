@@ -133,7 +133,7 @@ export const invitation = pgTable(
 		status: text("status").default("pending").notNull(),
 		createdAt: timestamp("created_at", { withTimezone: true })
 			.notNull()
-			.default(sqlNow),
+			.default(sqlTimestampNow),
 		expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
 		inviterId: text("inviter_id")
 			.notNull()
