@@ -23,9 +23,19 @@ tasks:
       - bun db:migrate
 
   redis:
-    desc: Start a simple Redis container (no volumes)
+    desc: Start Redis using redis-server (Direct)
     cmds:
-      - docker run -d --name autumn-redis -p 6379:6379 valkey/valkey:8.0
+      - redis-server
+
+  redis:docker:
+    desc: Start a persistent Redis container (Valkey)
+    cmds:
+      - docker run -d --name autumn-redis -p 6379:6379 -v autumn-redis-data:/data valkey/valkey:8.0
+
+  postgres:
+    desc: Start a persistent local Postgres container
+    cmds:
+      - docker run -d --name autumn-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v autumn-postgres-data:/var/lib/postgresql/data postgres:16
 
   server:
     desc: Start the backend server
@@ -41,3 +51,12 @@ tasks:
     desc: Start the BullMQ workers
     cmds:
       - cd server && bun workers:dev
+
+  compose:
+    desc: Start backend, frontend, and workers concurrently
+    deps: [server, vite, workers]
+
+  default:
+    desc: Alias for compose
+    cmds:
+      - task: compose
