@@ -1,13 +1,43 @@
-# yaml-language-server: $schema=https://taskfile.dev/schema.json
-
 version: '3'
 
-vars:
-  GREETING: Hello, world!
-
 tasks:
-  default:
-    desc: Print a greeting message
+  setup:
+    desc: Initial project setup
     cmds:
-      - echo "{{.GREETING}}"
-    silent: true
+      - bun install
+      - bun setup
+
+  db:push:
+    desc: Push database schema (Drizzle)
+    cmds:
+      - bun db:push
+
+  db:generate:
+    desc: Generate Drizzle migrations
+    cmds:
+      - bun db:generate
+
+  db:migrate:
+    desc: Run Drizzle migrations
+    cmds:
+      - bun db:migrate
+
+  redis:
+    desc: Start a simple Redis container (no volumes)
+    cmds:
+      - docker run -d --name autumn-redis -p 6379:6379 valkey/valkey:8.0
+
+  server:
+    desc: Start the backend server
+    cmds:
+      - cd server && bun dev
+
+  vite:
+    desc: Start the frontend (Vite)
+    cmds:
+      - cd vite && bun dev
+
+  workers:
+    desc: Start the BullMQ workers
+    cmds:
+      - cd server && bun workers:dev
