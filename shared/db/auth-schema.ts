@@ -11,7 +11,7 @@ import {
 	type Organization,
 	organizations,
 } from "../models/orgModels/orgTable.js";
-import { sqlNow } from "./utils.js";
+import { sqlNow, sqlTimestampNow } from "./utils.js";
 
 export const user = pgTable(
 	"user",
